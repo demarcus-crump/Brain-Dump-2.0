@@ -36,14 +36,20 @@ const TypewriterText: React.FC<TypewriterTextProps> = ({ text }) => {
 
   return (
     <motion.div 
-      key={text} // Re-animate when text changes (e.g. during refinement)
+      key={text} 
       variants={container}
       initial="hidden"
       animate="visible"
       className="flex flex-wrap gap-x-2 gap-y-1"
+      aria-label={text} /* Screen readers read this */
     >
       {words.map((word, index) => (
-        <motion.span key={index} variants={child} className="inline-block relative">
+        <motion.span 
+          key={index} 
+          variants={child} 
+          className="inline-block relative"
+          aria-hidden="true" /* Screen readers ignore this chopped up version */
+        >
           {word}
         </motion.span>
       ))}

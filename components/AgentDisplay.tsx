@@ -168,12 +168,15 @@ const AgentDisplay: React.FC<AgentDisplayProps> = ({ id, state, scale = 1, showL
       animate={state === 'working' ? getBodyAnimation() : state}
       variants={variants}
       style={{ scale }}
+      role="img"
+      aria-label={`${agent.name} (${state === 'working' ? 'Processing' : state})`}
     >
       {/* Agent Body */}
       <svg 
         viewBox="0 0 100 100" 
         className="w-24 h-24 drop-shadow-2xl interactive overflow-visible"
         style={{ filter: `drop-shadow(0 0 15px ${agent.color}66)` }}
+        aria-hidden="true"
       >
         <path d={paths[id]} fill={agent.color} />
         
@@ -234,6 +237,7 @@ const AgentDisplay: React.FC<AgentDisplayProps> = ({ id, state, scale = 1, showL
         <motion.div 
           className="absolute -bottom-8 bg-bg-surface px-3 py-1 rounded-full border border-bg-elevated text-xs font-bold tracking-wider opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10 pointer-events-none"
           style={{ color: agent.color }}
+          aria-hidden="true"
         >
           {agent.name.toUpperCase()}
         </motion.div>

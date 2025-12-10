@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AGENT_ORDER, AGENTS } from '../constants';
@@ -15,7 +16,12 @@ const ProcessingTheater: React.FC<ProcessingTheaterProps> = ({ currentAgentId })
   const currentStepIndex = AGENT_ORDER.indexOf(currentAgentId);
 
   return (
-    <div className="fixed inset-0 z-50 bg-bg-deep flex flex-col items-center justify-center p-8 overflow-hidden">
+    <div className="fixed inset-0 z-50 bg-bg-deep flex flex-col items-center justify-center p-8 overflow-hidden" role="status" aria-modal="true" aria-label="Processing your thoughts">
+      {/* Hidden live region for screen readers */}
+      <div className="sr-only" aria-live="polite">
+        {AGENTS[currentAgentId].role} is processing: {AGENTS[currentAgentId].catchphrase}
+      </div>
+
       {/* Background Dimmer */}
       <div className="absolute inset-0 bg-black/80 backdrop-blur-md" />
 
@@ -23,7 +29,7 @@ const ProcessingTheater: React.FC<ProcessingTheaterProps> = ({ currentAgentId })
       <ProcessingBackground agentId={currentAgentId} />
 
       {/* Progress Header (Relay Race) */}
-      <div className="relative z-20 flex gap-4 md:gap-8 mb-12 md:mb-24 w-full justify-center max-w-2xl px-4">
+      <div className="relative z-20 flex gap-4 md:gap-8 mb-12 md:mb-24 w-full justify-center max-w-2xl px-4" aria-hidden="true">
         {AGENT_ORDER.map((id, idx) => {
           const isPast = idx < currentStepIndex;
           const isCurrent = idx === currentStepIndex;
@@ -80,6 +86,7 @@ const ProcessingTheater: React.FC<ProcessingTheaterProps> = ({ currentAgentId })
               animate={{ opacity: 1, scale: 1, y: -30 }}
               transition={{ delay: 0.2, type: "spring" }}
               className="bg-white text-bg-deep font-display text-xl md:text-3xl px-8 py-6 rounded-[2rem] shadow-2xl relative mb-4 max-w-md text-center"
+              aria-hidden="true"
             >
               "{AGENTS[currentAgentId].catchphrase}"
               {/* Bubble Tail */}
@@ -104,6 +111,7 @@ const ProcessingTheater: React.FC<ProcessingTheaterProps> = ({ currentAgentId })
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
+              aria-hidden="true" // Already announced via live region
             >
               {AGENTS[currentAgentId].role} is processing...
             </motion.h2>

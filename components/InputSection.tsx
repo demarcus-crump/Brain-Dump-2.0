@@ -96,9 +96,11 @@ const InputSection: React.FC<InputSectionProps> = ({ onDump, isProcessing }) => 
           <div className={`absolute inset-0 rounded-[2rem] bg-gradient-to-br from-agent-listie via-transparent to-agent-blendy opacity-0 transition-opacity duration-500 pointer-events-none -z-10 ${isFocused ? 'opacity-100 blur-sm' : ''}`} />
 
           <div className="relative bg-bg-surface rounded-[1.8rem] overflow-hidden">
+             <label htmlFor="brain-dump-input" className="sr-only">Enter your messy thoughts here</label>
              <textarea
+              id="brain-dump-input"
               ref={inputRef}
-              className="w-full h-80 bg-bg-elevated/50 p-8 text-xl md:text-2xl text-white placeholder-text-muted/50 resize-none focus:outline-none focus:bg-bg-elevated transition-colors interactive font-body leading-relaxed"
+              className="w-full h-80 bg-bg-elevated/50 p-8 text-xl md:text-2xl text-white placeholder-text-muted/50 resize-none focus:outline-none focus:ring-2 focus:ring-agent-blendy focus:bg-bg-elevated transition-all interactive font-body leading-relaxed"
               placeholder={placeholder}
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
@@ -111,14 +113,15 @@ const InputSection: React.FC<InputSectionProps> = ({ onDump, isProcessing }) => 
               <MagneticButton 
                 onClick={() => onDump(inputText)}
                 disabled={!inputText.trim() || isProcessing}
-                className="interactive px-10 py-4 bg-gradient-to-r from-agent-listie to-agent-blendy text-white font-display text-xl rounded-full shadow-lg hover:shadow-xl flex items-center gap-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed group"
+                aria-label="Dump your thoughts for processing"
+                className="interactive px-10 py-4 bg-gradient-to-r from-agent-listie to-agent-blendy text-white font-display text-xl rounded-full shadow-lg hover:shadow-xl flex items-center gap-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed group focus:ring-4 focus:ring-white/50 focus:outline-none"
               >
                 <span className="group-hover:translate-x-1 transition-transform inline-block">DUMP IT!</span>
               </MagneticButton>
             </div>
             
             {/* Helper Text */}
-            <div className="absolute bottom-6 left-8 text-text-muted text-sm font-bold opacity-50 pointer-events-none">
+            <div className="absolute bottom-6 left-8 text-text-muted text-sm font-bold opacity-50 pointer-events-none" aria-hidden="true">
               Press Cmd + Enter to submit
             </div>
           </div>
