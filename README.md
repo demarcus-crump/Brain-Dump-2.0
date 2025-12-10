@@ -1,6 +1,3 @@
-<div align="center">
-<img width="1200" height="475" alt="Brain Dump 2.0 Banner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-
 # Brain Dump 2.0
 
 ### You spill it. We distill it. 🧠✨
