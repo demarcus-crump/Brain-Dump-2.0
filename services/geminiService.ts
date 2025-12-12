@@ -1,3 +1,4 @@
+
 import { GoogleGenAI, Type } from "@google/genai";
 import { BrainDumpResult, ConversationMessage } from "../types";
 
@@ -41,25 +42,30 @@ export const checkAmbiguity = async (input: string): Promise<{ isAmbiguous: bool
   return JSON.parse(text);
 };
 
-// --- AGENT 1: LISTIE (The Listener) ---
-// Model: Flash (Fast)
-// Goal: Extract raw facts
+// --- AGENT 1: LISTIE (The Decoder) ---
+// VON NEUMANN PUZZLE 2: INSTRUCTION VS. DATA
+// "A pattern of 1s and 0s can be an INSTRUCTION (command to follow) or DATA (information to set upon)."
 export const runListieAgent = async (input: string): Promise<string> => {
   const ai = getAI();
   const response = await ai.models.generateContent({
     model: "gemini-2.5-flash",
     contents: `User Input: "${input}"
     
-    You are Listie (The Listener). 
-    Extract the raw key points, facts, and intended actions from this messy thought. 
-    Be direct and concise. Output as a bulleted list.`,
+    You are Listie (The Decoder). Apply Von Neumann's Puzzle 2: "Distinguish Instruction vs. Data".
+    
+    The user's input is a mix of "Context/History" (DATA) and "Implied Actions/Commands" (INSTRUCTIONS).
+    
+    1. Extract the DATA: What are the facts, the numbers, the 'sign' description?
+    2. Extract the INSTRUCTIONS: What is the machine (the user) trying to BUILD or DO with this data?
+    
+    Output as a clear split list.`,
   });
   return response.text || "No actionable points found.";
 };
 
-// --- AGENT 2: LINKY (The Connector) ---
-// Model: Flash (Fast)
-// Goal: Find patterns
+// --- AGENT 2: LINKY (The Signal Detector) ---
+// VON NEUMANN PUZZLE 5: RELIABLE SYSTEMS FROM UNRELIABLE PARTS
+// "Key Distinction: SINGLE NOISY INPUT vs. REDUNDANT MAJORITY VOTE."
 export const runLinkyAgent = async (input: string, listieOutput: string): Promise<string> => {
   const ai = getAI();
   const response = await ai.models.generateContent({
@@ -67,50 +73,61 @@ export const runLinkyAgent = async (input: string, listieOutput: string): Promis
     contents: `Original Input: "${input}"
     Listie's Extraction: "${listieOutput}"
     
-    You are Linky (The Connector).
-    Look at the extracted points. Find 2-3 interesting relationships, contradictions, or hidden patterns between them.
-    Briefly explain these connections.`,
+    You are Linky (The Signal Detector). Apply Von Neumann's Puzzle 5: "Reliable Systems from Unreliable Parts".
+    
+    The input is "Noisy". You need to find the "Redundant Majority Vote".
+    - What themes or desires appear multiple times in different forms? (The Signal)
+    - What is just "Noise" (single, random inputs that don't fit the pattern)?
+    
+    Identify the Strong Signal.`,
   });
   return response.text || "No connections found.";
 };
 
-// --- AGENT 3: WORDY (The Translator) ---
-// Model: Flash (Fast)
-// Goal: Simplify language
+// --- AGENT 3: WORDY (The Observer) ---
+// VON NEUMANN PUZZLE 4: QUANTUM MEASUREMENT
+// "Key Distinction: POSSIBILITY ('maybe-land') vs. ACTUALITY ('actual-land')."
 export const runWordyAgent = async (input: string): Promise<string> => {
   const ai = getAI();
   const response = await ai.models.generateContent({
     model: "gemini-2.5-flash",
     contents: `Original Input: "${input}"
     
-    You are Wordy (The Translator).
-    Rewrite the core idea of this input in the simplest, most human terms possible. 
-    Avoid jargon. Make it sound like a clear, casual explanation to a friend. 
-    Keep it to 2-3 sentences.`,
+    You are Wordy (The Observer). Apply Von Neumann's Puzzle 4: "Possibility vs. Actuality".
+    
+    The user's thought exists in a state of "Possibility" (vague wishes, 'could be', 'might').
+    Collapse the wave function!
+    Rewrite the core idea as a concrete "Actuality".
+    - Convert "I want to maybe do X" to "The objective is X".
+    - Make it definite, grounded, and simple.`,
   });
   return response.text || "Could not simplify text.";
 };
 
-// --- AGENT 4: SPARKY (The Challenger) ---
-// Model: Flash (Fast)
-// Goal: Creative friction
+// --- AGENT 4: SPARKY (The Game Theorist) ---
+// VON NEUMANN PUZZLE 3: GAME THEORY & BLUFFING
+// "Key Distinction: REVEAL vs. CONCEAL."
 export const runSparkyAgent = async (listieOutput: string, wordyOutput: string): Promise<string> => {
   const ai = getAI();
   const response = await ai.models.generateContent({
     model: "gemini-2.5-flash",
-    contents: `Key Points: "${listieOutput}"
-    Simplified Summary: "${wordyOutput}"
+    contents: `Data/Instructions: "${listieOutput}"
+    Actualized Reality: "${wordyOutput}"
     
-    You are Sparky (The Challenger).
-    Ask 2 provocative "What if" questions that challenge the assumptions in this thought process.
-    Focus on gaps or potential pitfalls.`,
+    You are Sparky (The Game Theorist). Apply Von Neumann's Puzzle 3: "Reveal vs. Conceal".
+    
+    Analyze the user's strategy:
+    1. What are they REVEALING? (What are they confident about?)
+    2. What are they CONCEALING? (What are they bluffing about? What fears or gaps are hidden in the bet?)
+    
+    Challenge the "Bluff". Ask 2 questions that force them to show their hand.`,
   });
   return response.text || "No challenges identified.";
 };
 
-// --- AGENT 5: BLENDY (The Synthesizer) ---
-// Model: PRO (Smartest)
-// Goal: Final structured JSON
+// --- AGENT 5: BLENDY (The Architect) ---
+// THE MASTER KEY: SEPARATING USES
+// Goal: Gamified Output (Score + Badges + Insight)
 export const runBlendyAgent = async (
   input: string,
   listie: string,
@@ -121,19 +138,20 @@ export const runBlendyAgent = async (
   const ai = getAI();
   
   const systemInstruction = `
-    You are Blendy (The Synthesizer), the smartest AI agent (Gemini 3.0 Pro).
+    You are Blendy (The Architect), the smartest AI agent (Gemini 3.0 Pro).
+    You are building a "Reliable System" from the user's "Unreliable Parts".
     
-    Your team has processed a user's brain dump:
-    - User Input: "${input}"
-    - Listie (Key Points): "${listie}"
-    - Linky (Connections): "${linky}"
-    - Wordy (Simplification): "${wordy}"
-    - Sparky (Challenges): "${sparky}"
+    Analysis inputs:
+    - Listie (Data vs Instruction): "${listie}"
+    - Linky (Signal vs Noise): "${linky}"
+    - Wordy (Actuality): "${wordy}"
+    - Sparky (Game Theory): "${sparky}"
 
-    Your Job: Synthesize ALL of this into a final, brilliant insight.
-    
-    1. 'interpretation': Combine Wordy's simplicity with Linky's depth. It should be a definitive statement of what the user is *really* thinking.
-    2. 'keyPoints': Create 4 distinct, actionable bullet points that integrate Listie's facts with Sparky's cautions.
+    Your Job:
+    1. 'interpretation': Combine Wordy's "Actuality" with Linky's "Signal". A definitive statement of the system's purpose.
+    2. 'keyPoints': Create 4 actionable steps to build this system.
+    3. 'clarityScore': Rate the clarity of the *final synthesized result* compared to the chaos of the input (0-100). High score means you successfully found order.
+    4. 'badges': Award 3 short, punchy, gamified badges based on the content (e.g. "Signal Hunter", "Bluff Caller", "System Builder", "Logic Master", "Chaos Tamer").
     
     Output strictly valid JSON.
   `;
@@ -149,15 +167,23 @@ export const runBlendyAgent = async (
         properties: {
           interpretation: {
             type: Type.STRING,
-            description: "A clear, insightful summary of the synthesized thought.",
+            description: "A clear, insightful summary.",
           },
           keyPoints: {
             type: Type.ARRAY,
             items: { type: Type.STRING },
-            description: "4 distinct, actionable insights derived from the collective agent analysis.",
           },
+          clarityScore: {
+            type: Type.INTEGER,
+            description: "Score from 0 to 100",
+          },
+          badges: {
+            type: Type.ARRAY,
+            items: { type: Type.STRING },
+            description: "3 gamified achievement names",
+          }
         },
-        required: ["interpretation", "keyPoints"],
+        required: ["interpretation", "keyPoints", "clarityScore", "badges"],
       },
     },
   });
@@ -179,21 +205,13 @@ export const refineResult = async (
   const historyText = chatHistory.map(m => `${m.role === 'user' ? 'User' : 'Agent'}: ${m.text}`).join('\n');
 
   const systemInstruction = `
-    You are Blendy, the leader of the Brain Dump agent team. 
-    You are in a live session with the user, refining their "Brain Dump".
-    
+    You are Blendy.
     Original Input: "${originalInput}"
     Current Result: ${JSON.stringify(currentResult)}
     Conversation History:
     ${historyText}
 
-    The user just sent a new message. You must decide if they are:
-    A) Asking a question or discussing (Reply ONLY)
-    B) Requesting a change to the plan (Reply + Return New Result)
-
-    1. If they ask a question ("Why did you say X?"), return 'result': null.
-    2. If they want changes ("Add more details", "Change point 3"), return a fully updated 'result' object AND a 'reply'.
-
+    Decide if user wants to change the plan.
     Output JSON: { "result": BrainDumpResult | null, "reply": string }
   `;
 
@@ -212,6 +230,8 @@ export const refineResult = async (
             properties: {
               interpretation: { type: Type.STRING },
               keyPoints: { type: Type.ARRAY, items: { type: Type.STRING } },
+              clarityScore: { type: Type.INTEGER },
+              badges: { type: Type.ARRAY, items: { type: Type.STRING } }
             },
             required: ["interpretation", "keyPoints"]
           },

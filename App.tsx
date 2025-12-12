@@ -38,16 +38,16 @@ const App: React.FC = () => {
   // Scroll hooks for Parallax
   const { scrollY } = useScroll();
   
-  // Parallax Values - Tuned for smoother movement
+  // Parallax Values - TUNED FOR BETTER SEPARATION
   const yLogo = useTransform(scrollY, [0, 500], [0, 200]); 
   
-  // Tagline: Moves slower (parallax) and fades out to avoid overlapping next section
-  const yTagline = useTransform(scrollY, [0, 400], [0, 150]); 
-  const opacityTagline = useTransform(scrollY, [0, 300], [1, 0]);
+  // Tagline: Moves slower (parallax) and fades out faster
+  const yTagline = useTransform(scrollY, [0, 400], [0, 200]); 
+  const opacityTagline = useTransform(scrollY, [0, 200], [1, 0]);
 
-  // Scroll CTA: Fades out quickly and drops down
-  const yScrollCTA = useTransform(scrollY, [0, 200], [0, 100]);
-  const opacityScrollCTA = useTransform(scrollY, [0, 150], [1, 0]);
+  // Scroll CTA: Moves significantly faster to drop off screen and fades immediately
+  const yScrollCTA = useTransform(scrollY, [0, 200], [0, 150]);
+  const opacityScrollCTA = useTransform(scrollY, [0, 100], [1, 0]);
   
   // Floating Symbols Parallax (Drifting at different speeds)
   const ySym1 = useTransform(scrollY, [0, 500], [0, -150]); 
@@ -93,23 +93,23 @@ const App: React.FC = () => {
     setCurrentProcessingAgent('listie');
     
     try {
-      // 1. LISTIE (Extract)
+      // 1. LISTIE (Decoder)
       const listieOut = await runListieAgent(text);
       setCurrentProcessingAgent('linky');
 
-      // 2. LINKY (Connect)
+      // 2. LINKY (Signal Detector)
       const linkyOut = await runLinkyAgent(text, listieOut);
       setCurrentProcessingAgent('wordy');
 
-      // 3. WORDY (Simplify)
+      // 3. WORDY (Observer)
       const wordyOut = await runWordyAgent(text);
       setCurrentProcessingAgent('sparky');
 
-      // 4. SPARKY (Challenge)
+      // 4. SPARKY (Game Theorist)
       const sparkyOut = await runSparkyAgent(listieOut, wordyOut);
       setCurrentProcessingAgent('blendy');
 
-      // 5. BLENDY (Synthesize)
+      // 5. BLENDY (Architect)
       const finalResult = await runBlendyAgent(text, listieOut, linkyOut, wordyOut, sparkyOut);
       
       setTimeout(() => {
@@ -351,7 +351,9 @@ const App: React.FC = () => {
                 className="flex flex-col items-center group cursor-pointer relative"
                 onHoverStart={() => setHoveredAgentFooter(id)}
                 onHoverEnd={() => setHoveredAgentFooter(null)}
+                onClick={() => setHoveredAgentFooter(hoveredAgentFooter === id ? null : id)}
                 whileHover={{ y: -5 }}
+                whileTap={{ scale: 0.95 }}
               >
                 {/* Speech Bubble on Hover */}
                 <AnimatePresence>

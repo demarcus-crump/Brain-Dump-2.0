@@ -2,6 +2,8 @@
 export interface BrainDumpResult {
   interpretation: string;
   keyPoints: string[];
+  clarityScore: number;
+  badges: string[];
 }
 
 export type AgentId = 'listie' | 'linky' | 'wordy' | 'sparky' | 'blendy';

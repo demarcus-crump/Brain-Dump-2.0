@@ -5,52 +5,52 @@ export const AGENTS: Record<AgentId, AgentConfig> = {
   listie: {
     id: 'listie',
     name: 'Listie',
-    role: 'The Listener',
+    role: 'The Decoder',
     color: '#FF3366',
     highlight: '#FF6B8A',
-    catchphrase: "I hear something good!",
-    description: "Extracts key points and action items.",
-    introduction: "Hi! I'm Listie!"
+    catchphrase: "Separating Data from Instructions...",
+    description: "Separates raw data from actionable instructions (Von Neumann Puzzle 2).",
+    introduction: "Hi, I'm Listie! I separate your Data from Instructions."
   },
   linky: {
     id: 'linky',
     name: 'Linky',
-    role: 'The Connector',
+    role: 'The Signal Detector',
     color: '#00E5B8',
     highlight: '#4DEBB8',
-    catchphrase: "Ooh, these connect!",
-    description: "Finds relationships and contradictions.",
-    introduction: "Heya! I'm Linky!"
+    catchphrase: "Finding the Signal in the Noise...",
+    description: "Identifies the 'Redundant Majority Vote' to find truth (Von Neumann Puzzle 5).",
+    introduction: "Hey there, I'm Linky. I find the Signal in the Noise."
   },
   wordy: {
     id: 'wordy',
     name: 'Wordy',
-    role: 'The Translator',
+    role: 'The Observer',
     color: '#FFD426',
     highlight: '#FFE566',
-    catchphrase: "Let me rephrase that...",
-    description: "Clarifies language and simplifies concepts.",
-    introduction: "Greetings. I am Wordy."
+    catchphrase: "Collapsing possibilities...",
+    description: "Turns 'Maybe-land' possibilities into 'Actual-land' facts (Von Neumann Puzzle 4).",
+    introduction: "Greetings. I am Wordy. I collapse Possibilities into Reality."
   },
   sparky: {
     id: 'sparky',
     name: 'Sparky',
-    role: 'The Challenger',
+    role: 'The Game Theorist',
     color: '#FF6B2C',
     highlight: '#FF8F5A',
-    catchphrase: "But what if...?",
-    description: "Identifies assumptions and gaps.",
-    introduction: "Yo! Name's Sparky."
+    catchphrase: "Revealing the concealed...",
+    description: "Analyzes the bet: What are you revealing vs. concealing? (Von Neumann Puzzle 3).",
+    introduction: "Yo, I'm Sparky! I see exactly what you're Bluffing."
   },
   blendy: {
     id: 'blendy',
     name: 'Blendy',
-    role: 'The Synthesizer',
+    role: 'The Architect',
     color: '#7B5CFF',
     highlight: '#9F85FF',
-    catchphrase: "Aha! I see it now!",
-    description: "Creates the final interpretation.",
-    introduction: "Hello. I am Blendy."
+    catchphrase: "System compiled.",
+    description: "Synthesizes the distinct uses into a reliable system.",
+    introduction: "System Online. I am Blendy, your Architect."
   }
 };
 

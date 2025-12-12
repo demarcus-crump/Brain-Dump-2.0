@@ -41,14 +41,14 @@ const TypewriterText: React.FC<TypewriterTextProps> = ({ text }) => {
       initial="hidden"
       animate="visible"
       className="flex flex-wrap gap-x-2 gap-y-1"
-      aria-label={text} /* Screen readers read this */
+      aria-label={text} /* Screen readers read the full sentence here */
     >
       {words.map((word, index) => (
         <motion.span 
           key={index} 
           variants={child} 
           className="inline-block relative"
-          aria-hidden="true" /* Screen readers ignore this chopped up version */
+          aria-hidden="true" /* Hide individual animated chunks from screen readers to prevent stuttering */
         >
           {word}
         </motion.span>
