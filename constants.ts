@@ -9,7 +9,7 @@ export const AGENTS: Record<AgentId, AgentConfig> = {
     color: '#FF3366',
     highlight: '#FF6B8A',
     catchphrase: "Separating Data from Instructions...",
-    description: "Separates raw data from actionable instructions (Von Neumann Puzzle 2).",
+    description: "Separates your raw context/backstory from the actions you actually need to take.",
     introduction: "Hi, I'm Listie! I separate your Data from Instructions."
   },
   linky: {
@@ -19,7 +19,7 @@ export const AGENTS: Record<AgentId, AgentConfig> = {
     color: '#00E5B8',
     highlight: '#4DEBB8',
     catchphrase: "Finding the Signal in the Noise...",
-    description: "Identifies the 'Redundant Majority Vote' to find truth (Von Neumann Puzzle 5).",
+    description: "Finds the recurring patterns and 'majority votes' hidden in your messy thoughts.",
     introduction: "Hey there, I'm Linky. I find the Signal in the Noise."
   },
   wordy: {
@@ -29,7 +29,7 @@ export const AGENTS: Record<AgentId, AgentConfig> = {
     color: '#FFD426',
     highlight: '#FFE566',
     catchphrase: "Collapsing possibilities...",
-    description: "Turns 'Maybe-land' possibilities into 'Actual-land' facts (Von Neumann Puzzle 4).",
+    description: "Collapses vague 'maybe-land' possibilities into concrete 'actual-land' realities.",
     introduction: "Greetings. I am Wordy. I collapse Possibilities into Reality."
   },
   sparky: {
@@ -39,7 +39,7 @@ export const AGENTS: Record<AgentId, AgentConfig> = {
     color: '#FF6B2C',
     highlight: '#FF8F5A',
     catchphrase: "Revealing the concealed...",
-    description: "Analyzes the bet: What are you revealing vs. concealing? (Von Neumann Puzzle 3).",
+    description: "Analyzes the strategy: What are you revealing versus what are you bluffing/concealing?",
     introduction: "Yo, I'm Sparky! I see exactly what you're Bluffing."
   },
   blendy: {
@@ -49,7 +49,7 @@ export const AGENTS: Record<AgentId, AgentConfig> = {
     color: '#7B5CFF',
     highlight: '#9F85FF',
     catchphrase: "System compiled.",
-    description: "Synthesizes the distinct uses into a reliable system.",
+    description: "Synthesizes all the insights into a reliable, improved system for your life.",
     introduction: "System Online. I am Blendy, your Architect."
   }
 };
