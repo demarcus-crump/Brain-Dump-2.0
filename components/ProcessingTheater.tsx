@@ -43,7 +43,8 @@ const ProcessingTheater: React.FC<ProcessingTheaterProps> = ({ currentAgentId })
 
                <motion.div 
                  className={`relative z-10 transition-all duration-500 flex items-center justify-center ${isCurrent ? 'scale-125 drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]' : 'scale-100'}`}
-                 animate={isCurrent ? { y: [0, -5, 0], transition: { repeat: Infinity } } : {}}
+                 animate={isCurrent ? { y: [0, -5, 0] } : {}}
+                 transition={{ y: { repeat: Infinity, duration: 2.5, ease: "easeInOut" } }}
                >
                  <AgentDisplay 
                    id={id} 

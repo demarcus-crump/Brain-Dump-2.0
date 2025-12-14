@@ -13,7 +13,7 @@ const ProcessingBackground: React.FC<ProcessingBackgroundProps> = ({ agentId }) 
 
   const renderParticles = () => {
     switch (agentId) {
-      case 'listie': // Scanning / Hearing waves
+      case 'listie': // Scanning / Hearing waves - FIXED FLASHING
         return (
           <>
             {[...Array(3)].map((_, i) => (
@@ -21,9 +21,14 @@ const ProcessingBackground: React.FC<ProcessingBackgroundProps> = ({ agentId }) 
                 key={`wave-${i}`}
                 className="absolute inset-0 border-2 rounded-full"
                 style={{ borderColor: color }}
-                initial={{ opacity: 0, scale: 0.5 }}
-                animate={{ opacity: [0, 0.5, 0], scale: 1.5 }}
-                transition={{ duration: 2, repeat: Infinity, delay: i * 0.6 }}
+                initial={{ opacity: 0.6, scale: 0.5 }}
+                animate={{ opacity: 0, scale: 1.5 }}
+                transition={{ 
+                  duration: 2.5, 
+                  repeat: Infinity, 
+                  delay: i * 0.8,
+                  ease: "easeOut"
+                }}
               />
             ))}
           </>

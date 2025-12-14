@@ -83,12 +83,12 @@ const AgentDisplay: React.FC<AgentDisplayProps> = ({ id, state, scale = 1, showL
           opacity: 1,
           transition: { duration: 3, repeat: Infinity, ease: "easeInOut" }
         };
-      case 'listie': // Bouncing rhythmically (listening)
+      case 'listie': // Bouncing rhythmically (listening) - SLOWED DOWN
         return {
-          y: [0, -10, 0],
-          scale: [1, 0.95, 1],
+          y: [0, -8, 0],
+          scale: [1, 0.98, 1],
           opacity: 1,
-          transition: { duration: 0.6, repeat: Infinity }
+          transition: { duration: 1.5, repeat: Infinity, ease: "easeInOut" }
         };
       default:
         return variants.working;
@@ -217,8 +217,8 @@ const AgentDisplay: React.FC<AgentDisplayProps> = ({ id, state, scale = 1, showL
         {/* Mouth (Morphs based on state) */}
         <g transform="translate(0, 5)">
             {state === 'working' ? (
-                <path d="M35 65 Q50 75 65 65" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round">
-                    <animate attributeName="d" values="M35 65 Q50 75 65 65;M35 60 Q50 50 65 60;M35 65 Q50 75 65 65" dur="0.2s" repeatCount="indefinite" />
+                <path d="M40 65 Q50 70 60 65" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round">
+                    <animate attributeName="d" values="M40 65 Q50 70 60 65;M40 65 Q50 62 60 65;M40 65 Q50 70 60 65" dur="1.5s" repeatCount="indefinite" />
                 </path>
             ) : state === 'complete' ? (
                 <path d="M30 60 Q50 75 70 60" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" />
